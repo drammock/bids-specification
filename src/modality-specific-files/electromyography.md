@@ -36,10 +36,14 @@ languages and SHOULD be widely supported in multiple software packages.
 Other formats that may be considered in the future should have a clear added advantage
 over the existing formats and should have wide adoption in the BIDS community.
 
+The [`acq-<label>`](../appendices/entities.md#acq) entity MAY be used to indicate simultaneous acquisition of data from multiple EMG devices, in cases where the devices store data in separate data files. If separate devices are being used with separate sampling rates, start times, or other acquisition parameters, the `acq-<label>` entity MUST be used to distinguish between them.
+The synchronization of data from multiple devices SHOULD be described in the [Scans](../modality-agnostic-files.md#scans-file) (`scans.tsv`) file, using the `acq_time` entity.
+<!-- TODO Latency coloumn in the acquisition or events file from BIDS-Motion for continous recording -->
+
 We encourage users to provide additional metadata extracted from the
 manufacturer-specific data files in the sidecar JSON file.
 
-Note the `RecordingType`, which depends on whether the data stream on disk is interrupted or not.
+Note the `RecordingType` in the `emg.json` file, which depends on whether the data stream on disk is interrupted or not.
 Continuous data is by definition 1 segment without interruption.
 Epoched data consists of multiple segments that all have the same length
 (for example, corresponding to trials) and that have gaps in between.
